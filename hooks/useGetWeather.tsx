@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import { WEATHER_API_URL, WEATHER_API_KEY } from '@env';
-
 interface WeatherData {
   temperature: number;
   description: string;
@@ -15,17 +13,15 @@ export const useGetWeather = (location: string) => {
   useEffect(() => {
     const fetchWeather = async () => {
       if (!location) return;
-
       setLoading(true);
       setError(null);
-
+      const url = `${process.env.EXPO_PUBLIC_WEATHER_API_URL}?key=${process.env.EXPO_PUBLIC_WEATHER_API_KEY}&q=${location}`
+      console.log(url);
       try {
-        const response = await fetch(
-          `${process.env.WEATHER_API_URL}?key=${process.env.WEATHER_API_KEY}&q=${location}`
-        );
-
+        const response = await fetch(url);
         if (!response.ok) {
           throw new Error('Failed to fetch weather data');
+          console.log(response)
         }
 
         const data = await response.json();
