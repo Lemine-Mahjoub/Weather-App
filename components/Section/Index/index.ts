@@ -1,0 +1,1 @@
+export { IndexContainer } from './IndexContainer';
