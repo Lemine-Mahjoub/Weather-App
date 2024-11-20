@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import { useGetWeather } from '@/hooks/useGetWeather';
-import { useGetCityName } from '@/hooks/useGetCityName';
+import { AppDataContext } from '@/context/AppDataContext';
+
 export const IndexContainer: React.FC = () => {
-  const { weatherData, loading, error } = useGetWeather('Paris');
+  const { weatherDataDefault, loading, error } = useContext(AppDataContext);
 
   return (
     <View style={styles.container}>
-      <Text>{loading ? 'Loading...' : ''}</Text>
-      <Text>{error ? error : ''}</Text>
-      <Text>{weatherData?.temperature}</Text>
-      <Text>{weatherData?.description}</Text>
-      <Text>{weatherData?.humidity}</Text>
+      {loading && <Text>Loading...</Text>}
+      {error && <Text>{error}</Text>}
+      {!loading && !error && (
+        <>
+          <Text>{weatherDataDefault?.temperature}</Text>
+          <Text>{weatherDataDefault?.description}</Text>
+          <Text>{weatherDataDefault?.humidity}</Text>
+        </>
+      )}
     </View>
   );
 };

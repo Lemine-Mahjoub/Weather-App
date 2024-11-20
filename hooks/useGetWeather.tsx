@@ -6,14 +6,12 @@ interface WeatherData {
   humidity: number;
 }
 
-
-
 export const useGetWeather = (location: string) => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const url = `${process.env.EXPO_PUBLIC_WEATHER_API_URL}?key=${process.env.EXPO_PUBLIC_WEATHER_API_KEY}&q=${location}`
-  console.log(url);
+
   useEffect(() => {
     const fetchWeather = async () => {
       if (!location) return;
