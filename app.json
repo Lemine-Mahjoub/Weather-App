@@ -40,7 +40,7 @@
         [
           "expo-location",
           {
-            "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+            "locationAlwaysAndWhenInUsePermission": "Cette application utilise votre localisation pour afficher la ville dans laquelle vous vous trouvez."
           }
         ]
       ],
