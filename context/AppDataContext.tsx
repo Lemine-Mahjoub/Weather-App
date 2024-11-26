@@ -1,5 +1,11 @@
 import { createContext } from 'react';
 
+interface WeatherDataDefault {
+  description: string;
+  humidity: number;
+  temperature: number;
+}
+
 interface AppDataContextType {
   theme: 'light' | 'dark';
   setTheme: (theme: 'light' | 'dark') => void;
@@ -7,10 +13,10 @@ interface AppDataContextType {
   setDefaultCity: (city: string) => void;
   researchCity: string | null;
   setResearchCity: (city: string | null) => void;
-  weatherDataDefault: any;
-  setWeatherDataDefault: (weatherData: any) => void;
-  weatherDataResearch: any;
-  setWeatherDataResearch: (weatherData: any) => void;
+  weatherDataDefault: WeatherDataDefault | null;
+  setWeatherDataDefault: (weatherData: WeatherDataDefault | null) => void;
+  weatherDataResearch: WeatherDataDefault | null;
+  setWeatherDataResearch: (weatherData: WeatherDataDefault | null) => void;
   loading: boolean;
   error: string | null;
 }
@@ -20,11 +26,11 @@ export const AppDataContext = createContext<AppDataContextType>({
   setTheme: () => {},
   defaultCity: '',
   setDefaultCity: () => {},
-  researchCity: '',
+  researchCity: null,
   setResearchCity: () => {},
-  weatherDataDefault: {},
+  weatherDataDefault: null,
   setWeatherDataDefault: () => {},
-  weatherDataResearch: {},
+  weatherDataResearch: null,
   setWeatherDataResearch: () => {},
   loading: false,
   error: null,

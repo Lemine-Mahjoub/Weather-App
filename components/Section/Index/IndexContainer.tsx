@@ -3,17 +3,18 @@ import { View, StyleSheet, Text } from 'react-native';
 import { AppDataContext } from '@/context/AppDataContext';
 
 export const IndexContainer: React.FC = () => {
-  const { weatherDataDefault, loading, error } = useContext(AppDataContext);
-
+  const { weatherDataDefault, loading, error, defaultCity } = useContext(AppDataContext);
+  console.log(weatherDataDefault);
   return (
     <View style={styles.container}>
       {loading && <Text>Loading...</Text>}
-      {error && <Text>{error}</Text>}
+      {error && <Text>Error: {error}</Text>}
       {!loading && !error && (
         <>
-          <Text>{weatherDataDefault?.temperature}</Text>
           <Text>{weatherDataDefault?.description}</Text>
           <Text>{weatherDataDefault?.humidity}</Text>
+          <Text>{weatherDataDefault?.temperature}</Text>
+          <Text>{defaultCity}</Text>
         </>
       )}
     </View>

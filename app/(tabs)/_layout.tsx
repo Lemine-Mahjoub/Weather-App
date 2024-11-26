@@ -20,18 +20,8 @@ export default function TabLayout() {
           default: {},
         }),
       }}>
-      <Tabs.Screen
-        name="index"
-        options={{ title: 'Home', tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} /> }}
-      />
-      <Tabs.Screen
-        name="search"
-        options={{ title: 'Search', tabBarIcon: ({ color }) => <IconSymbol size={28} name="magnifyingglass.circle.fill" color={color} /> }}
-      />
-      <Tabs.Screen
-        name="settings"
-        options={{ title: 'Settings', tabBarIcon: ({ color }) => <IconSymbol size={28} name="gearshape.fill" color={color} /> }}
-      />
+      <Tabs.Screen name="index" options={{ title: 'Home', tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} /> }} />
+      <Tabs.Screen name="search" options={{ title: 'Search', tabBarIcon: ({ color }) => <IconSymbol size={28} name="magnifyingglass.circle.fill" color={color} /> }} />
     </Tabs>
   );
 }
