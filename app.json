@@ -1,51 +1,55 @@
 {
-    "expo": {
-      "name": "AngelicWeather",
-      "slug": "AngelicWeather",
-      "version": "1.0.0",
-      "orientation": "portrait",
-      "icon": "./assets/images/icon.png",
-      "scheme": "myapp",
-      "userInterfaceStyle": "automatic",
-      "newArchEnabled": true,
-      "ios": {
-        "supportsTablet": true,
-        "infoPlist": {
-          "NSLocationWhenInUseUsageDescription": "Cette application utilise votre localisation pour afficher la ville dans laquelle vous vous trouvez."
-        }
-      },
-      "android": {
-        "adaptiveIcon": {
-          "foregroundImage": "./assets/images/adaptive-icon.png",
-          "backgroundColor": "#ffffff"
-        },
-        "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"]
-      },
-      "web": {
-        "bundler": "metro",
-        "output": "static",
-        "favicon": "./assets/images/favicon.png"
-      },
-      "plugins": [
-        "expo-router",
-        [
-          "expo-splash-screen",
-          {
-            "image": "./assets/images/splash-icon.png",
-            "imageWidth": 200,
-            "resizeMode": "contain",
-            "backgroundColor": "#ffffff"
-          }
-        ],
-        [
-          "expo-location",
-          {
-            "locationAlwaysAndWhenInUsePermission": "Cette application utilise votre localisation pour afficher la ville dans laquelle vous vous trouvez."
-          }
-        ]
-      ],
-      "experiments": {
-        "typedRoutes": true
+  "expo": {
+    "name": "AngelicWeather",
+    "slug": "AngelicWeather",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Cette application utilise votre localisation pour afficher la ville dans laquelle vous vous trouvez."
       }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION"
+      ]
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Cette application utilise votre localisation pour afficher la ville dans laquelle vous vous trouvez."
+        }
+      ],
+      "expo-font"
+    ],
+    "experiments": {
+      "typedRoutes": true
     }
   }
+}
