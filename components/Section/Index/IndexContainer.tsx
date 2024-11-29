@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { View, StyleSheet, Text, Image, ScrollView } from 'react-native';
 import { AppDataContext } from '@/context/AppDataContext';
-import { getImage } from '@/components/ImageSource';
+import { getImage, WeatherType } from '@/components/ImageSource';
 import { useFonts } from 'expo-font';
 import HourlyForecast from './HourlyForecast';
+import DaysForecast from './DaysForecast';
 
 export const IndexContainer: React.FC = () => {
   const { weatherDataDefault, loading, error, defaultCity } = useContext(AppDataContext);
@@ -17,22 +18,23 @@ export const IndexContainer: React.FC = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {loading && <Text>Loading...</Text>}
       {error && <Text>Error: {error}</Text>}
       {!loading && !error && (
         <>
           <View style={styles.actualWeather}>
             <View style={styles.imageContainer}>
-              <Image source={getImage({ type: weatherDataDefault?.description as 'sunny' | 'cloudy' | 'rainy' | 'snowy' | 'stormy' })} />
+              <Image source={getImage({ type: weatherDataDefault?.description as WeatherType['type'] })} />
             </View>
             <Text style={styles.city}>{defaultCity}</Text>
             <Text style={styles.temperature}>{weatherDataDefault?.temperature}°C</Text>
           </View>
-          <HourlyForecast location={'Paris'} />
+          <HourlyForecast location={defaultCity} />
+          <DaysForecast location={defaultCity} />
         </>
       )}
-    </View>
+    </ScrollView>
   );
 };
 
@@ -42,9 +44,9 @@ const styles = StyleSheet.create({
     padding: 16,
     paddingTop: 48,
     backgroundColor: '#27272A',
-    alignItems: 'center',
     width: '100%',
     height: '100%',
+    paddingBottom: 48,
   },
   imageContainer: {
     padding: 24,

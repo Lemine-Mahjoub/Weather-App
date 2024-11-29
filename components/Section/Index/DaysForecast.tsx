@@ -1,33 +1,33 @@
 import React from 'react';
 import { View, Text, ScrollView, StyleSheet, Image } from 'react-native';
 import { useGetFutureForecast } from '@/hooks/useGetFuturForecast';
-import { getImage, WeatherType } from '@/components/ImageSource';
+import { getImage } from '@/components/ImageSource';
 import { useFonts, Poppins_400Regular, Poppins_300Light } from '@expo-google-fonts/poppins';
+import AppLoading from 'expo-app-loading';
 
-const HourlyForecast = ({ location }: { location: string }) => {
+const DaysForecast = ({ location }: { location: string }) => {
   let [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_300Light,
   });
 
-
-
-  const { hourlyForecast, loading, error } = useGetFutureForecast(location);
+  const { dailyForecast, loading, error } = useGetFutureForecast(location);
 
   if (loading) return <Text>Loading...</Text>;
   if (error) return <Text>Error: {error}</Text>;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Temperature du Jour </Text>
+      <Text style={styles.title}>Temperature de la Semaine </Text>
       <ScrollView horizontal style={styles.scrollView}>
-        {hourlyForecast.map((hour: any, index: number) => (
+        {dailyForecast.map((day: any, index: number) => (
           <View key={index} style={styles.card}>
             <View style={styles.imageContainer}>
-              <Image style={styles.image} source={getImage({ type: hour.description as WeatherType['type'] })} />
+              <Image style={styles.image} source={getImage({ type: day.description as 'sunny' | 'cloudy' | 'rainy' | 'snowy' | 'stormy' })} />
             </View>
-            <Text style={styles.time}>{formatTime(hour.time)}</Text>
-            <Text style={styles.temperature}>{hour.temperature}°C</Text>
+            <Text style={styles.date}>{formatDate(day.date)}</Text>
+            <Text style={styles.temperature}>Max: {day.maxTemperature}°C</Text>
+            <Text style={styles.temperature}>Min: {day.minTemperature}°C</Text>
           </View>
         ))}
       </ScrollView>
@@ -35,9 +35,9 @@ const HourlyForecast = ({ location }: { location: string }) => {
   );
 };
 
-function formatTime(time: string) {
-  const date = new Date(time);
-  return date.getHours().toString().padStart(2, '0') + ':00';
+function formatDate(date: string) {
+  const options = { weekday: 'long' };
+  return new Date(date).toLocaleDateString('fr-FR', options);
 }
 
 const styles = StyleSheet.create({
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
   },
-  time: {
+  date: {
     fontSize: 12,
     paddingTop: 12,
     fontWeight: '400',
@@ -92,11 +92,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins_400Regular',
   },
   temperature: {
-    fontSize: 10,
-    paddingTop: 4,
+    fontSize: 8,
+    paddingTop: 2,
     color: '#64748B',
     fontFamily: 'Poppins_400Regular',
   },
 });
 
-export default HourlyForecast;
+export default DaysForecast;

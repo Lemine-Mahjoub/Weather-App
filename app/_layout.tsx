@@ -44,6 +44,16 @@ export default function RootLayout() {
     setError(weatherError);
   }, [weatherData, weatherLoading, weatherError]);
 
+  useEffect(() => {
+    if (researchCity) {
+      const { weatherData, error, loading } = useGetWeather(researchCity);
+      setWeatherDataResearch(weatherData);
+      setError(error ?? '');
+      setLoading(loading);
+    }
+  }, [researchCity]);
+
+
   const contextValue = useMemo(
     () => ({
       theme,
